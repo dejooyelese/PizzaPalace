@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -28,20 +30,18 @@
         <table>
             <tr>
                 <th>Order Number</th>
-                <th>Total Price</th>
                 <th>Delete</th>
                 <th>Edit</th>
                 <th>Print</th>
             </tr>
-            <c:forEach var="order" items="${orders}">
+ 
                 <tr>
-                    <td>${order.number}</td>
-                    <td>${order.total}</td>
+                    <td>${orderNumber}</td>
                     <td>
                         <form action="orders" method="post" >
                             <input type="submit" value="Delete">
                             <input type="hidden" name="action" value="delete">
-                            <input type="hidden" name="selectedOrder" value="${order.number}">
+                            <input type="hidden" name="selectedOrder" value="$}">
                         </form>
                     </td>
                     <td>
@@ -59,11 +59,10 @@
                         </form>
                     </td>
                 </tr>
-            </c:forEach>
         </table>
         ------------------------<br>
  
-        <h2>Order Number: ${todo}</h2>   
+        <h2>Order Number: ${orderNumber}</h2>   
         <table>
             <tr>
                 <th>Pizza Size</th>
@@ -72,11 +71,11 @@
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
-            <c:forEach var="order" items="${orders}">
+            <c:forEach var="pizza" items="${pizzas}">
                 <tr>
-                    <td>${pizza.size}</td>
-                    <td>${pizza.toppings}</td>
-                    <td>${pizza.price}</td>
+                    <td>${pizza.pizzaSize}</td>
+                    <td>${TODO}</td>
+                    <td>${pizza.bPrice}</td>
                     <td>
                         <form action="orders" method="get">
                             <input type="submit" value="Edit">
