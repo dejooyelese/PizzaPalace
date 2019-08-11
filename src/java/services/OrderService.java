@@ -12,7 +12,7 @@ public class OrderService {
         orderDB = new OrderDB();
     }
 
-    public Order get(String orderNumber) throws Exception {
+    public Order get(Integer orderNumber) throws Exception {
         return orderDB.getOrder(orderNumber);
     }
 
@@ -20,19 +20,19 @@ public class OrderService {
         return orderDB.getAll();
     }
 
-    public int update(String orderNumber) throws Exception {
+    public int update(Integer orderNumber) throws Exception {
         Order order = get(orderNumber);
         order.setOrderNumber(orderNumber);
         return orderDB.update(order);
     }
 
-    public int delete(String orderNumber) throws Exception {
+    public int delete(Integer orderNumber) throws Exception {
         Order deletedOrder = orderDB.getOrder(orderNumber);
         return orderDB.delete(deletedOrder);
     }
 
-    public int insert(String orderNumber) throws Exception {
-        Order order = new Order(orderNumber);
+    public int insert(Integer orderNumber, String holder) throws Exception {
+        Order order = new Order(orderNumber, holder);
         return orderDB.insert(order);
     }
 }

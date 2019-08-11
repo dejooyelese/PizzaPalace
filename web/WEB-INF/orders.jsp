@@ -18,11 +18,13 @@
         
         <p>${errorMessage}</p>
         
-        <p><input type="submit" value="New Order">
-            <input type="hidden" name="action" value="add">
+        <p>
+        <form action="orders?new" method="POST" >
+            <input type="submit" value="New Order">
+        </form>
             
             <input type="submit" value="Print Current Order">
-            <input type="hidden" name="action" value="add">
+            <input type="hidden" name="action" value="">
         </p>
         
         

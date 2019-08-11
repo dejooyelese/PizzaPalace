@@ -8,6 +8,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -27,27 +29,41 @@ public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "orderNumber")
-    private String orderNumber;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner", fetch = FetchType.EAGER)
+    private Integer orderNumber;
+    @Column(name = "orderName")
+    private String orderName;
+    
+    
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner", fetch = FetchType.EAGER)
     private List<Pizza> pizzaList;
 
     public Order () {
     }
 
-    public Order(String orderNumber) {
+    public Order(Integer orderNumber, String orderName) {
         this.orderNumber = orderNumber;
+        this.orderName = orderName;
     }
 
-    public String getOrderNumber() {
+    public Integer getOrderNumber() {
         return orderNumber;
     }
 
-    public void setOrderNumber(String orderNumber) {
+    public void setOrderNumber(Integer orderNumber) {
         this.orderNumber = orderNumber;
     }
 
+    public String getOrderName() {
+        return orderName;
+    }
+
+    public void setOrderName(String orderName) {
+        this.orderName = orderName;
+    }
+    
     @XmlTransient
     public List<Pizza> getPizzaList() {
         return pizzaList;
@@ -79,7 +95,7 @@ public class Order implements Serializable {
 
     @Override
     public String toString() {
-        return  orderNumber;
+        return   ""+orderNumber;
     }
     
 }

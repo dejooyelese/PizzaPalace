@@ -25,7 +25,7 @@ public class OrderServlet extends HttpServlet {
 
         OrderService os = new OrderService();
         Order o = null;
-        String thisOrderNumber = "000";
+        Integer thisOrderNumber = 000;
         try {
             List<Order> orderList = os.getAllOrders();
             request.setAttribute("orderList", orderList);
@@ -67,12 +67,24 @@ public class OrderServlet extends HttpServlet {
         }
         if(request.getParameter("edit") != null) {
             try {
-                request.setAttribute("orderNumber", os.get(request.getParameter("orderToEdit")));
+                request.setAttribute("orderNumber", os.get(Integer.parseInt(request.getParameter("orderToEdit"))));
             } catch (Exception ex) {
                 Logger.getLogger(OrderServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+        }else 
+        
+        if(request.getParameter("new") != null) {
+           request.setAttribute("errorMessage", "HERE");
+            try {
+                os.insert(0,"Standard");
+               
+            } catch (Exception ex) {
+                request.setAttribute("errorMessage", "ERROR");
+                Logger.getLogger(OrderServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    
         }
+
        getServletContext().getRequestDispatcher("/WEB-INF/orders.jsp").forward(request, response);
     }
        

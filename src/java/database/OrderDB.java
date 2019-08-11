@@ -6,6 +6,8 @@
 package database;
 import models.Order;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
@@ -20,15 +22,12 @@ public class OrderDB {
             em.persist(order);
             trans.commit();
         } catch (Exception e) {
-            System.out.println(e);
-            // JPA automatically rollsback might not need this
-            //if(trans.isActive()) {
+             Logger.getLogger(OrderDB.class.getName()).log(Level.SEVERE, "Cannot insert " + order.toString(), e);
                 trans.rollback();
-            //}
         } finally {
             em.close();
         }
-        return 1;
+        return 0;
     }
     
     public int update(Order order) throws PizzaPalaceDBException {
@@ -57,7 +56,7 @@ public class OrderDB {
         }
     }
     
-    public Order getOrder(String orderNumber) throws PizzaPalaceDBException {
+    public Order getOrder(Integer orderNumber) throws PizzaPalaceDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
                 Order order = em.find(Order.class, orderNumber);
