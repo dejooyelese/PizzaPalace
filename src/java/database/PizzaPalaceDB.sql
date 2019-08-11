@@ -11,6 +11,7 @@ CREATE TABLE Pizzas (
     orderNumber VARCHAR(20) NOT NULL,
     pizzaNumber VARCHAR(20) NOT NULL,
     pizzaSize CHAR(1) NOT NULL,
+    bPrice DECIMAL(4,2) NOT NULL,
     PRIMARY KEY (pizzaNumber),
     CONSTRAINT FK_orderNumber FOREIGN KEY (orderNumber) REFERENCES orders(orderNumber));
 
@@ -29,9 +30,13 @@ CREATE TABLE PT_bridge (
 
 INSERT INTO Orders(orderNumber)
 VALUES("000");
+INSERT INTO Orders(orderNumber)
+VALUES("001");
+INSERT INTO Orders(orderNumber)
+VALUES("002");
 
-INSERT INTO Pizzas(orderNumber, pizzaNumber, pizzaSize)
-VALUES("000","1",'L');
+INSERT INTO Pizzas(orderNumber, pizzaNumber, pizzaSize, bPrice)
+VALUES("000","1",'L',16);
 
 INSERT INTO Toppings(toppingName, sPrice, mPrice, lPrice)
 VALUES("Cheese",0.25,0.75,1.00);
