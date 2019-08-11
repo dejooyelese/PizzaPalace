@@ -26,6 +26,12 @@ public class OrderServlet extends HttpServlet {
         OrderService os = new OrderService();
         Order o = null;
         String thisOrderNumber = "000";
+        try {
+            List<Order> orderList = os.getAllOrders();
+            request.setAttribute("orderList", orderList);
+        } catch (Exception ex) {
+            Logger.getLogger(OrderServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         try {
             o = os.get(thisOrderNumber);
@@ -38,6 +44,7 @@ public class OrderServlet extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(OrderServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+       
 
         //request.setAttribute("pizzas", o.getPizzaList());
         getServletContext().getRequestDispatcher("/WEB-INF/orders.jsp").forward(request, response);
@@ -51,7 +58,21 @@ public class OrderServlet extends HttpServlet {
         HttpSession session = request.getSession();
         OrderService os = new OrderService();
         String orderNumber = (String) session.getAttribute("orderNumber");
-
+        Order o = null;
+        try {
+            List<Order> orderList = os.getAllOrders();
+            request.setAttribute("orderList", orderList);
+        } catch (Exception ex) {
+            Logger.getLogger(OrderServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(request.getParameter("edit") != null) {
+            try {
+                request.setAttribute("orderNumber", os.get(request.getParameter("orderToEdit")));
+            } catch (Exception ex) {
+                Logger.getLogger(OrderServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
        getServletContext().getRequestDispatcher("/WEB-INF/orders.jsp").forward(request, response);
     }
        
