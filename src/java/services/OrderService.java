@@ -42,8 +42,9 @@ public class OrderService {
         return orderDB.update(order);
     }
     
-    public int deletePizza(Integer orderNumber) throws Exception {
-        return 1;
+    public int deletePizza(Integer pizzaNumber) throws Exception {
+        Pizza deletedPizza = pizzaDB.getPizza(pizzaNumber);
+        return pizzaDB.delete(deletedPizza);
     }
     
     public int updateOrder(Integer orderNumber) throws Exception {

@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import models.Pizza;
 
 public class OrderDB {
     
@@ -66,6 +67,22 @@ public class OrderDB {
         } finally {
                 em.close();
         }
+    }
+    
+    public int deletePizza(Pizza pizza) throws PizzaPalaceDBException {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        trans.begin();
+        try {
+            em.remove(em.merge(pizza));
+            trans.commit();
+        } catch (Exception e) {
+            System.out.println(e);
+            trans.rollback();
+        } finally {
+            em.close();
+        }
+        return 1;
     }
     
     public int delete(Order order) throws PizzaPalaceDBException {

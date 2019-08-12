@@ -46,7 +46,7 @@ public class OrderServlet extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(OrderServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //request.setAttribute("pizzas", o.getPizzaList());
+        
         getServletContext().getRequestDispatcher("/WEB-INF/orders.jsp").forward(request, response);
     }
        
@@ -63,14 +63,14 @@ public class OrderServlet extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(OrderServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(request.getParameter("edit") != null) {
+        if(request.getParameter("editOrder") != null) {
             try {
                 request.setAttribute("orderNumber", os.getOrder(Integer.parseInt(request.getParameter("orderToEdit"))));
             } catch (Exception ex) {
                 Logger.getLogger(OrderServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else 
-        if(request.getParameter("new") != null) {
+        if(request.getParameter("newOrder") != null) {
             try {
                 os.insertOrder(0,"Standard");
             } catch (Exception ex) {
@@ -83,13 +83,20 @@ public class OrderServlet extends HttpServlet {
             } catch (Exception ex) {
                 Logger.getLogger(OrderServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }else
+        if(request.getParameter("deleteOrder") != null) {
+            try {
+                os.deleteOrder(Integer.parseInt(request.getParameter("orderToDelete")));
+            } catch (Exception ex) {
+                Logger.getLogger(OrderServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
         
         
         
         
-        
+        //Load the Tables
         try {
             List<Order> orderList = os.getAllOrders();
             request.setAttribute("orderList", orderList);

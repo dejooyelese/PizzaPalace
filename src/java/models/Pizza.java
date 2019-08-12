@@ -45,6 +45,10 @@ public class Pizza implements Serializable {
     @Basic(optional = false)
     @Column(name = "bPrice")
     private double bPrice;
+    
+    @JoinColumn(name = "Owner", referencedColumnName = "orderNumber")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private Order owner;
 
     public Pizza() {
     }
@@ -98,6 +102,14 @@ public class Pizza implements Serializable {
 
     public void setOrderNumber(Integer orderNumber) {
         this.orderNumber = orderNumber;
+    }
+    
+    public Order getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Order owner) {
+        this.owner = owner;
     }
 
     @Override

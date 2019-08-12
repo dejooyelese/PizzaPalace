@@ -31,8 +31,17 @@ public class PizzaDB {
     public int delete(Pizza pizza){
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
-   
-        return 0;
+        trans.begin();
+        try {
+            em.remove(em.merge(pizza));
+            trans.commit();
+        } catch (Exception e) {
+            System.out.println(e);
+            trans.rollback();
+        } finally {
+            em.close();
+        }
+        return 1;
     }
 
     public List<Pizza> getAllFromOrder(Integer orderNumber) throws PizzaPalaceDBException {

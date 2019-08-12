@@ -39,14 +39,13 @@
                 <tr>
                     <td>${orderItem.orderNumber}</td>
                     <td>
-                        <form action="orders" method="get" >
+                        <form action="orders?deleteOrder" method="POST" >
                             <input type="submit" value="Delete">
-                            <input type="hidden" name="action" value="delete">
-                            <input type="hidden" name="selectedOrder" value="$}">
+                            <input type="hidden" name="orderToDelete" value="${orderItem.orderNumber}">
                         </form>
                     </td>
                     <td>
-                        <form action="orders?edit" method="POST">
+                        <form action="orders?editOrder" method="POST">
                             <input type="submit" value="Edit">
                             <input type="hidden" name="orderToEdit" value="${orderItem.orderNumber}">
                         </form>
@@ -86,10 +85,9 @@
                         </form>
                     </td>
                     <td>
-                        <form action="orders" method="post">
+                        <form action="orders?deletePizza" method="POST">
                             <input type="submit" value="Delete">
-                            <input type="hidden" name="action" value="print">
-                            <input type="hidden" name="selectedOrder" value="$}">
+                            <input type="hidden" name="pizzaToDelete" value="${pizzaItem.pizzaNumber}">
                         </form>
                     </td>
                 </tr>

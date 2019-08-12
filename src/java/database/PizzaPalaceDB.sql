@@ -13,8 +13,11 @@ CREATE TABLE Pizzas (
     pizzaNumber INT NOT NULL AUTO_INCREMENT,
     pizzaSize VARCHAR(20) NOT NULL,
     bPrice DECIMAL(4,2) NOT NULL,
+    Owner INT NOT NULL,
     PRIMARY KEY (pizzaNumber),
-    FOREIGN KEY (orderNumber) REFERENCES Orders(orderNumber));
+    CONSTRAINT fk_pizza_orders FOREIGN KEY (Owner) REFERENCES Orders(orderNumber)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
 
 CREATE TABLE Toppings (
     toppingName VARCHAR(20) NOT NULL,
@@ -36,14 +39,14 @@ VALUES(2,"Standard");
 INSERT INTO Orders(orderNumber, orderName)
 VALUES(3,"Standard");
 
-INSERT INTO Pizzas(orderNumber, pizzaNumber, pizzaSize, bPrice)
-VALUES(1,1,"Large",16);
+INSERT INTO Pizzas(orderNumber, pizzaNumber, pizzaSize, bPrice,Owner)
+VALUES(1,1,"Large",16,1);
 
-INSERT INTO Pizzas(orderNumber, pizzaNumber, pizzaSize, bPrice)
-VALUES(1,2,"Large",16);
+INSERT INTO Pizzas(orderNumber, pizzaNumber, pizzaSize, bPrice,Owner)
+VALUES(1,2,"Large",16,1);
 
-INSERT INTO Pizzas(orderNumber, pizzaNumber, pizzaSize, bPrice)
-VALUES(3,3,"Large",16);
+INSERT INTO Pizzas(orderNumber, pizzaNumber, pizzaSize, bPrice,Owner)
+VALUES(3,3,"Large",16,3);
 
 INSERT INTO Toppings(toppingName, sPrice, mPrice, lPrice)
 VALUES("Cheese",0.25,0.75,1.00);
