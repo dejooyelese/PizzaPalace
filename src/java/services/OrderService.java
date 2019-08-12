@@ -35,29 +35,30 @@ public class OrderService {
     public List<Pizza> getAllPizzaFromOrder(Integer orderNumber) throws Exception {
         return pizzaDB.getAllFromOrder(orderNumber);
     }
+      
+    public int updatePizza(Integer orderNumber) throws Exception {
+        Order order = getOrder(orderNumber);
+        order.setOrderNumber(orderNumber);
+        return orderDB.update(order);
+    }
     
+    public int deletePizza(Integer orderNumber) throws Exception {
+        return 1;
+    }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    public int update(Integer orderNumber) throws Exception {
+    public int updateOrder(Integer orderNumber) throws Exception {
         Order order = getOrder(orderNumber);
         order.setOrderNumber(orderNumber);
         return orderDB.update(order);
     }
 
-    public int delete(Integer orderNumber) throws Exception {
+    public int deleteOrder(Integer orderNumber) throws Exception {
         Order deletedOrder = orderDB.getOrder(orderNumber);
         return orderDB.delete(deletedOrder);
     }
 
-    public int insert(Integer orderNumber, String holder) throws Exception {
+    public int insertOrder(Integer orderNumber, String holder) throws Exception {
         Order order = new Order(orderNumber, holder);
-        return orderDB.insert(order);
+        return orderDB.insertOrder(order);
     }
 }

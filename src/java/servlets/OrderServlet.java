@@ -21,7 +21,6 @@ public class OrderServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
      
-        HttpSession session = request.getSession();
         OrderService os = new OrderService();
         Order o = null;
         Integer thisOrderNumber = 000;
@@ -55,11 +54,9 @@ public class OrderServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        HttpSession session = request.getSession();
+
         OrderService os = new OrderService();
-        Order o = null;
-        
+
         try {
             List<Order> orderList = os.getAllOrders();
             request.setAttribute("orderList", orderList);
@@ -73,15 +70,26 @@ public class OrderServlet extends HttpServlet {
                 Logger.getLogger(OrderServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else 
-        
         if(request.getParameter("new") != null) {
             try {
-                os.insert(0,"Standard");
+                os.insertOrder(0,"Standard");
             } catch (Exception ex) {
                 Logger.getLogger(OrderServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-    
+        }else
+        if(request.getParameter("deletePizza") != null) {
+            try {
+                os.deletePizza(Integer.parseInt(request.getParameter("pizzaToDelete")));
+            } catch (Exception ex) {
+                Logger.getLogger(OrderServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        
+        
+        
+        
+        
+        
         try {
             List<Order> orderList = os.getAllOrders();
             request.setAttribute("orderList", orderList);

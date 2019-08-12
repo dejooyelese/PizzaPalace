@@ -13,7 +13,7 @@ import javax.persistence.EntityTransaction;
 
 public class OrderDB {
     
-    public int insert(Order order) throws PizzaPalaceDBException {
+    public int insertOrder(Order order) throws PizzaPalaceDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         
@@ -29,6 +29,8 @@ public class OrderDB {
         }
         return 0;
     }
+    
+    
     
     public int update(Order order) throws PizzaPalaceDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
