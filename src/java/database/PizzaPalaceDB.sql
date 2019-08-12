@@ -10,8 +10,8 @@ CREATE TABLE Orders (
 
 CREATE TABLE Pizzas (
     orderNumber INT NOT NULL,
-    pizzaNumber VARCHAR(20) NOT NULL,
-    pizzaSize CHAR(1) NOT NULL,
+    pizzaNumber INT NOT NULL AUTO_INCREMENT,
+    pizzaSize VARCHAR(20) NOT NULL,
     bPrice DECIMAL(4,2) NOT NULL,
     PRIMARY KEY (pizzaNumber),
     FOREIGN KEY (orderNumber) REFERENCES Orders(orderNumber));
@@ -26,7 +26,7 @@ CREATE TABLE Toppings (
 
 CREATE TABLE PT_bridge (
     toppingName VARCHAR(20) NOT NULL,
-    pizzaNumber VARCHAR(20) NOT NULL,
+    pizzaNumber INT NOT NULL,
     CONSTRAINT PK_top_pizza PRIMARY KEY (toppingName, pizzaNumber));
 
 INSERT INTO Orders(orderNumber, orderName)
@@ -37,7 +37,13 @@ INSERT INTO Orders(orderNumber, orderName)
 VALUES(3,"Standard");
 
 INSERT INTO Pizzas(orderNumber, pizzaNumber, pizzaSize, bPrice)
-VALUES(1,"1",'L',16);
+VALUES(1,1,"Large",16);
+
+INSERT INTO Pizzas(orderNumber, pizzaNumber, pizzaSize, bPrice)
+VALUES(1,2,"Large",16);
+
+INSERT INTO Pizzas(orderNumber, pizzaNumber, pizzaSize, bPrice)
+VALUES(3,3,"Large",16);
 
 INSERT INTO Toppings(toppingName, sPrice, mPrice, lPrice)
 VALUES("Cheese",0.25,0.75,1.00);

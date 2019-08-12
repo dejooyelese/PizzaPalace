@@ -1,18 +1,22 @@
 package services;
 
 import database.OrderDB;
+import database.PizzaDB;
 import models.Order;
+import models.Pizza;
 import java.util.List;
 
 public class OrderService {
 
     private OrderDB orderDB;
+    private PizzaDB pizzaDB;
 
     public OrderService() {
         orderDB = new OrderDB();
+        pizzaDB = new PizzaDB();
     }
 
-    public Order get(Integer orderNumber) throws Exception {
+    public Order getOrder(Integer orderNumber) throws Exception {
         return orderDB.getOrder(orderNumber);
     }
 
@@ -20,8 +24,29 @@ public class OrderService {
         return orderDB.getAll();
     }
 
+    public Pizza getPizza(Integer pizzaNumber) throws Exception {
+        return pizzaDB.getPizza(pizzaNumber);
+    }
+
+    public List<Pizza> getAllPizza() throws Exception {
+        return pizzaDB.getAll();
+    }
+    
+    public List<Pizza> getAllPizzaFromOrder(Integer orderNumber) throws Exception {
+        return pizzaDB.getAllFromOrder(orderNumber);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public int update(Integer orderNumber) throws Exception {
-        Order order = get(orderNumber);
+        Order order = getOrder(orderNumber);
         order.setOrderNumber(orderNumber);
         return orderDB.update(order);
     }

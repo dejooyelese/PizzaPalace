@@ -25,7 +25,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "Pizzas")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Pizza.findAll", query = "SELECT i FROM Pizza i")})
+    @NamedQuery(name = "Pizza.findAll", query = "SELECT p FROM Pizza p")
+    , @NamedQuery(name = "Pizza.findByOrderNumber", query = "SELECT p FROM Pizza p WHERE p.orderNumber = :orderNumber")})
 
 public class Pizza implements Serializable {
 
@@ -36,17 +37,14 @@ public class Pizza implements Serializable {
     @Column(name = "pizzaNumber")
     private Integer pizzaNumber;
     @Basic(optional = false)
+    @Column(name = "orderNumber")
+    private Integer orderNumber;
+    @Basic(optional = false)
     @Column(name = "pizzaSize")
     private String pizzaSize;
     @Basic(optional = false)
     @Column(name = "bPrice")
     private double bPrice;
-    //@JoinColumn(name = "pizzaSize", referencedColumnName = "SizeID")
-   // @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    //private Category category;
-    @JoinColumn(name = "Owner", referencedColumnName = "orderNumber")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Order owner;
 
     public Pizza() {
     }
@@ -55,7 +53,7 @@ public class Pizza implements Serializable {
         this.pizzaNumber = pizzaNumber;
     }
 
-    public Pizza (Integer pizzaNumber, String pizzaSize, double bPrice) {
+    public Pizza (Integer pizzaNumber, String pizzaSize, double bPrice, Integer orderNumber) {
         this.pizzaNumber = pizzaNumber;
         this.pizzaSize = pizzaSize;
         if (this.pizzaSize.equals("Large")){
@@ -67,6 +65,7 @@ public class Pizza implements Serializable {
         if (this.pizzaSize.equals("Small")){
             this.bPrice = 12;
         }
+        this.orderNumber = orderNumber;
     }
 
     public Integer getPizzaNumber() {
@@ -85,7 +84,7 @@ public class Pizza implements Serializable {
         this.pizzaSize = pizzaSize;
     }
 
-    public double getBPrice() {
+    public double getbPrice() {
         return bPrice;
     }
 
@@ -93,12 +92,12 @@ public class Pizza implements Serializable {
         this.bPrice = bPrice;
     }
 
-    public Order getOwner() {
-        return owner;
+    public Integer getOrderNumber() {
+        return orderNumber;
     }
 
-    public void setOwner(Order owner) {
-        this.owner = owner;
+    public void setOrderNumber(Integer orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
     @Override

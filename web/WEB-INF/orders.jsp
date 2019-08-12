@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -19,12 +20,9 @@
         <p>${errorMessage}</p>
         
         <p>
-        <form action="orders?new" method="POST" >
+            <form action="orders?new" method="POST" >
             <input type="submit" value="New Order">
-        </form>
-            
-            <input type="submit" value="Print Current Order">
-            <input type="hidden" name="action" value="">
+            </form>
         </p>
         
         
@@ -74,11 +72,12 @@
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
-            <c:forEach var="pizza" items="${pizzas}">
+            
+                <c:forEach var="pizzaItem" items="${pizzaList}">
                 <tr>
-                    <td>${pizza.pizzaSize}</td>
-                    <td>${TODO}</td>
-                    <td>${pizza.bPrice}</td>
+                    <td>${pizzaItem.pizzaSize}</td>
+                    <td>${orderNumber}</td>
+                    <td><fmt:formatNumber value = "${pizzaItem.bPrice}" type = "currency"/></td>
                     <td>
                         <form action="orders" method="get">
                             <input type="submit" value="Edit">
@@ -95,7 +94,9 @@
                     </td>
                 </tr>
             </c:forEach>
-            </table>                    
+            </table>    
+        
+        ------------------------<br>
             <h3>Add Pizza</h3>
             <form action="pizzas" method="POST">
                 <p>Size:</p>   
