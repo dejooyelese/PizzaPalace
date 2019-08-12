@@ -1,9 +1,3 @@
-<%-- 
-    Document   : orders
-    Created on : Aug 10, 2019, 12:00:15 PM
-    Author     : Dejo
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
@@ -20,7 +14,7 @@
         <p>${errorMessage}</p>
         
         <p>
-            <form action="orders?new" method="POST" >
+            <form action="orders?newOrder" method="POST" >
             <input type="submit" value="New Order">
             </form>
         </p>
@@ -51,8 +45,8 @@
                         </form>
                     </td>
                     <td>
-                        <form action="orders" method="get">
-                            <input type="submit" value="Print">
+                        <form action="orders" method="POST">
+                            <input type="button" value="Print">
                             <input type="hidden" name="action" value="print">
                             <input type="hidden" name="selectedOrder" value="$}">
                         </form>
@@ -75,13 +69,11 @@
                 <c:forEach var="pizzaItem" items="${pizzaList}">
                 <tr>
                     <td>${pizzaItem.pizzaSize}</td>
-                    <td>${orderNumber}</td>
+                    <td>${"TO DO"}</td>
                     <td><fmt:formatNumber value = "${pizzaItem.bPrice}" type = "currency"/></td>
                     <td>
-                        <form action="orders" method="get">
-                            <input type="submit" value="Edit">
-                            <input type="hidden" name="action" value="view">
-                            <input type="hidden" name="selectedOrder" value="$}">
+                        <form method="POST">
+                            <input type="button" value="Edit">
                         </form>
                     </td>
                     <td>
@@ -113,22 +105,9 @@
                         <input type="checkbox" name="topping" value="feta"> Feta Cheese<br>
                         <input type="checkbox" name="topping" value="tomatoes"> Tomatoes <br>
                         <input type="checkbox" name="topping" value="olives"> Olives<br>
-                        
-                
-                <p><input type="submit" value="Add To Order">
+
+                <p><input type="button" value="Add To Order">
                     <input type="hidden" name="action" value="add"></p>
             </form>
-            
-            
-<!--            <h3>Edit User</h3>
-            <form action="users" method="POST">
-                username: <input type="text" name="username" value="${selectedUser.username}" readonly><br>
-                password: <input type="password" name="password" value="${selectedUser.password}"><br>
-                first name: <input type="text" name="firstname" value="${selectedUser.firstname}"><br>
-                last name: <input type="text" name="lastname" value="${selectedUser.lastname}"><br>
-                email: <input type="email" name="email" value="${selectedUser.email}"><br>
-                <input type="hidden" name="action" value="edit">
-                <input type="submit" value="Save">
-            </form>-->
     </body>
 </html>

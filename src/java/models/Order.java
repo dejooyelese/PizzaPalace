@@ -35,10 +35,7 @@ public class Order implements Serializable {
     private Integer orderNumber;
     @Column(name = "orderName")
     private String orderName;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Owner", fetch = FetchType.EAGER)
-    
-    
-    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Owner", fetch = FetchType.EAGER)   
     private List<Pizza> pizzaList;
 
     public Order () {

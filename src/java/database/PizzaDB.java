@@ -2,10 +2,7 @@
 package database;
 
 import models.Pizza;
-import models.Order;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
@@ -24,7 +21,7 @@ public class PizzaDB {
     public int insert(Pizza pizza) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
-
+        // TO DO
         return 0;
     }
 

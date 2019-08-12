@@ -43,10 +43,13 @@ INSERT INTO Pizzas(orderNumber, pizzaNumber, pizzaSize, bPrice,Owner)
 VALUES(1,1,"Large",16,1);
 
 INSERT INTO Pizzas(orderNumber, pizzaNumber, pizzaSize, bPrice,Owner)
-VALUES(1,2,"Large",16,1);
+VALUES(1,2,"Small",12,1);
 
 INSERT INTO Pizzas(orderNumber, pizzaNumber, pizzaSize, bPrice,Owner)
 VALUES(3,3,"Large",16,3);
+
+INSERT INTO Pizzas(orderNumber, pizzaNumber, pizzaSize, bPrice,Owner)
+VALUES(2,4,"Medium",14,3);
 
 INSERT INTO Toppings(toppingName, sPrice, mPrice, lPrice)
 VALUES("Cheese",0.25,0.75,1.00);

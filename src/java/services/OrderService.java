@@ -8,8 +8,8 @@ import java.util.List;
 
 public class OrderService {
 
-    private OrderDB orderDB;
-    private PizzaDB pizzaDB;
+    final OrderDB orderDB;
+    final PizzaDB pizzaDB;
 
     public OrderService() {
         orderDB = new OrderDB();
